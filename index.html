@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="./libs/bootstrap.min.css">
+  <link rel="stylesheet" href="./style/style.css">
+  <title>Quiz</title>
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div class="header-box d-flex justify-content-between">
+            <div class="logo">BURGER-QUIZ</div>
+            <div class="contacts">+7 999 999-99-99</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="main">
+    <div class="container">
+
+      <div class="row">
+        <div class="col">
+          <div class="box d-flex flex-column align-items-center">
+            <h2 class="main-title text-center">Пройди тест и собери</h2>
+            <h2 class="main-title text-center">бургер своей мечты</h2>
+          </div>
+        </div>
+      </div <div class="row">
+      <div class="col">
+        <div class="box d-flex justify-content-center">
+          <div class="content"></div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="box d-flex justify-content-center">
+          <div class="arrow">&dArr;</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <div class="box d-flex justify-content-center">
+          <button type="button" class="btn btn-outline-danger" id="btnOpenModal">
+            <span class="btnText">Пройди тест и получи результат</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    </div>
+  </section>
+
+  <div class="modal" tabindex="-1" role="dialog" id="modalBlock">
+    <div class="modal-dialog  modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Ответь на вопрос:</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeModal">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body  d-flex flex-column align-items-center" id="modalBody">
+          <h4 class="question" id="question">Вопрос</h4>
+          <div class="answers" id="answers">
+            <form action="#" id="formAnswers" class="formAnswers d-flex flex-wrap">
+              <!-- <div class="answers-item">
+                <input type="radio" id="answerItem1" name="answer">
+                <label for="answerItem1">Ответ1</label>
+              </div>
+              <div class="answers-item">
+                <input type="radio" id="answerItem2" name="answer">
+                <label for="answerItem2">Ответ2</label>
+              </div>
+              <div class="answers-item">
+                <input type="radio" id="answerItem3" name="answer">
+                <label for="answerItem3">Ответ3</label>
+              </div>
+              <div class="answers-item">
+                <input type="radio" id="answerItem4" name="answer">
+                <label for="answerItem4">Ответ4</label>
+              </div> -->
+            </form>
+          </div>
+        </div>
+        <div class="modal-footer" id="modalFooter">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" id="prev">Prev</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" id="next">Next</button>
+          <button type="button" class="btn btn-primary sendBtn" id="send">Send</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script src="./script/scrypt.js"></script>
+</body>
+
+</html>
