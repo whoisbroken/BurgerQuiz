@@ -15,9 +15,12 @@
     <div class="container">
       <div class="row">
         <div class="col">
-          <div class="header-box d-flex justify-content-between">
-            <div class="logo">BURGER-QUIZ</div>
-            <div class="contacts">+7 999 999-99-99</div>
+          <div class="d-flex justify-content-between p-1 p-sm-2 p-md-3">
+            <div class="logo d-flex">
+              <div class="logo-img"></div>
+              <span class="logo-text h1">BURGER-QUIZ</span>
+            </div>
+            <h1 class="contacts d-none d-md-block">GLO Academy</h1>
           </div>
         </div>
       </div>
@@ -29,35 +32,38 @@
 
       <div class="row">
         <div class="col">
-          <div class="box d-flex flex-column align-items-center">
-            <h2 class="main-title text-center">Пройди тест и собери</h2>
-            <h2 class="main-title text-center">бургер своей мечты</h2>
+          <div class="d-flex justify-content-center p-1 p-sm-2 p-md-3">
+            <div class="content"></div>
           </div>
         </div>
-      </div <div class="row">
-      <div class="col">
-        <div class="box d-flex justify-content-center">
-          <div class="content"></div>
-        </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <div class="box d-flex justify-content-center">
-          <div class="arrow">&dArr;</div>
-        </div>
-      </div>
-    </div>
 
-    <div class="row">
-      <div class="col">
-        <div class="box d-flex justify-content-center">
-          <button type="button" class="btn btn-outline-danger" id="btnOpenModal">
-            <span class="btnText">Пройди тест и получи результат</span>
-          </button>
+      <div class="row">
+        <div class="col">
+          <div class="d-flex flex-column align-items-center p-1 p-sm-2 p-md-3">
+            <h2 class="main-title text-center h1">Пройди тест и собери</h2>
+            <h2 class="main-title text-center h1">бургер своей мечты</h2>
+          </div>
         </div>
       </div>
-    </div>
+
+      <div class="row">
+        <div class="col">
+          <div class="d-flex justify-content-center p-1 p-sm-2 p-md-3">
+            <div class="arrow display-4">&dArr;</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <div class="d-flex justify-content-center p-1 p-sm-2 p-md-3">
+            <button type="button" class="btn btn-outline-danger" id="btnOpenModal">
+              <span class="btnText h1">Пройди тест и получи результат</span>
+            </button>
+          </div>
+        </div>
+      </div>
 
     </div>
   </section>
@@ -72,8 +78,8 @@
           </button>
         </div>
         <div class="modal-body  d-flex flex-column align-items-center" id="modalBody">
-          <h4 class="question" id="question">Вопрос</h4>
-          <div class="answers" id="answers">
+          <h4 class="question p-1 p-sm-2 p-md-3" id="question">Вопрос</h4>
+          <div class="answers w-100 p-1 p-sm-2 p-md-3" id="answers">
             <form action="#" id="formAnswers" class="formAnswers d-flex flex-wrap">
               <!-- <div class="answers-item">
                 <input type="radio" id="answerItem1" name="answer">
@@ -97,7 +103,7 @@
         <div class="modal-footer" id="modalFooter">
           <button type="button" class="btn btn-secondary" data-dismiss="modal" id="prev">Prev</button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal" id="next">Next</button>
-          <button type="button" class="btn btn-primary sendBtn" id="send">Send</button>
+          <button type="button" class="btn btn-primary sendBtn d-none" id="send">Send</button>
         </div>
       </div>
     </div>

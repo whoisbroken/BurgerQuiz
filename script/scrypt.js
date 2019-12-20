@@ -9,8 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 { title: 2 },
                 { title: 10 },
                 { title: 15 },
-                { title: 20 },
-                { title: 25 }
+                { title: 20 }
             ],
             correctAnswer: 2
         },
@@ -19,7 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
             answers: [
                 { title: 3 },
                 { title: 6 },
-                { title: 9 },
                 { title: 12 },
                 { title: 18 }
             ],
@@ -31,7 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 { title: 72 },
                 { title: 99 },
                 { title: 108 },
-                { title: 134 },
                 { title: 156 },
             ],
             correctAnswer: 0
@@ -42,8 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 { title: 4 },
                 { title: 5 },
                 { title: 6 },
-                { title: 7 },
-                { title: 8 }
+                { title: 7 }
             ],
             correctAnswer: 3
         },
@@ -51,7 +47,6 @@ document.addEventListener('DOMContentLoaded', () => {
             question: "What is 8*8?",
             answers: [
                 { title: 20 },
-                { title: 30 },
                 { title: 40 },
                 { title: 50 },
                 { title: 64 },
@@ -98,10 +93,10 @@ document.addEventListener('DOMContentLoaded', () => {
             questions[index].answers.forEach((answer) => {
 
                 const itemBlock = document.createElement('div');
-                itemBlock.classList.add('answers-item');
+                itemBlock.classList.add('answers-item', 'col-3', 'd-flex', 'justify-content-center');
 
                 itemBlock.innerHTML = `
-                    <input type="radio" id="answerItem1" name="answer">
+                    <input type="radio" id="answerItem1" name="answer" class="d-none">
                     <label for="answerItem1">${answer.title}</label>
                 `
                 answersOutput.appendChild(itemBlock);
