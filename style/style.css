@@ -45,6 +45,13 @@ label:hover {
     background: rgba(0,0,0, 0.5);
 }
 
+.modal-content {
+    background: #E0FFFF;
+    /* color: #3CB371; */
+    /* -webkit-text-stroke-width: 1px; */
+    /* -webkit-text-stroke-color: black;  */
+}
+
 .btn-outline-danger {
     background-color: inherit;
     border: 1px solid #3CB371 !important;

@@ -55,6 +55,23 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     ];
 
+    let data = {};
+
+    const getResource = async (url) => {
+        const res = await fetch(url);
+
+        if (!res.ok) {
+            throw new Error(`Could not fetch ${url}, status: ${res.status}`);
+        }
+        console.log(res);
+
+
+        return await res.json();
+    }
+
+    getResource(' http://localhost:3000/questions')
+        .then(res => data = res)
+
     const btnOpenModal = document.getElementById('btnOpenModal');
     const modalBlock = document.getElementById('modalBlock');
     const btnCloseModal = document.getElementById('closeModal');
@@ -86,6 +103,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const playTest = () => {
         const numberQuestion = 0;
         const answers = [];
+        console.log(data);
+
+
+        answersOutput.innerHTML = '';
 
         // функция выдает нам элементы ответов для отрисовки
         const renderQiestions = (index) => {
