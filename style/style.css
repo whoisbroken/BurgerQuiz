@@ -9,7 +9,6 @@ li {
 
 label {
     cursor: pointer;
-    padding: 5px;
     border: 2px solid #000;
     border-radius: 0 0 10px 10px;
     min-width: 60px;
@@ -17,8 +16,24 @@ label {
 }
 
 label:hover {
+    border: 2px solid rgba(0,0,0,0.5);
+}
+
+input:checked + label{
     border: 2px solid #3CB371;
     color: #3CB371;
+}
+
+label span {
+    font-size: 14px;
+}
+
+.answerImg {
+    width: 100%;
+}
+
+.answers-item {
+    width: 80px;
 }
 
 .logo-img {

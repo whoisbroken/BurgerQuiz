@@ -4,73 +4,93 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const questions = [
         {
-            question: "What is 2*5?",
+            question: "Какого цвета бургер?",
             answers: [
-                { title: 2 },
-                { title: 10 },
-                { title: 15 },
-                { title: 20 }
+                {
+                    title: 'Стандарт',
+                    url: './image/burger.png'
+                },
+                {
+                    title: 'Черный',
+                    url: './image/burgerBlack.png'
+                }
             ],
-            correctAnswer: 2
+            type: 'radio'
         },
         {
-            question: "What is 3*6?",
+            question: "Из какого мяса котлета?",
             answers: [
-                { title: 3 },
-                { title: 6 },
-                { title: 12 },
-                { title: 18 }
+                {
+                    title: 'Курица',
+                    url: './image/chickenMeat.png'
+                },
+                {
+                    title: 'Говядина',
+                    url: './image/beefMeat.png'
+                },
+                {
+                    title: 'Свинина',
+                    url: './image/porkMeat.png'
+                }
             ],
-            correctAnswer: 4
+            type: 'radio'
         },
         {
-            question: "What is 8*9?",
+            question: "Дополнительные ингредиенты?",
             answers: [
-                { title: 72 },
-                { title: 99 },
-                { title: 108 },
-                { title: 156 },
+                {
+                    title: 'Помидор',
+                    url: './image/tomato.png'
+                },
+                {
+                    title: 'Огурец',
+                    url: './image/cucumber.png'
+                },
+                {
+                    title: 'Салат',
+                    url: './image/salad.png'
+                },
+                {
+                    title: 'Лук',
+                    url: './image/onion.png'
+                }
             ],
-            correctAnswer: 0
+            type: 'checkbox'
         },
         {
-            question: "What is 1*7?",
+            question: "Добавить соус?",
             answers: [
-                { title: 4 },
-                { title: 5 },
-                { title: 6 },
-                { title: 7 }
+                {
+                    title: 'Чесночный',
+                    url: './image/sauce1.png'
+                },
+                {
+                    title: 'Томатный',
+                    url: './image/sauce2.png'
+                },
+                {
+                    title: 'Горчичный',
+                    url: './image/sauce3.png'
+                }
             ],
-            correctAnswer: 3
-        },
-        {
-            question: "What is 8*8?",
-            answers: [
-                { title: 20 },
-                { title: 40 },
-                { title: 50 },
-                { title: 64 },
-            ],
-            correctAnswer: 4
+            type: 'radio'
         }
     ];
 
-    let data = {};
+    // let data = {};
 
-    const getResource = async (url) => {
-        const res = await fetch(url);
+    // const getResource = async (url) => {
+    //     const res = await fetch(url);
 
-        if (!res.ok) {
-            throw new Error(`Could not fetch ${url}, status: ${res.status}`);
-        }
-        console.log(res);
+    //     if (!res.ok) {
+    //         throw new Error(`Could not fetch ${url}, status: ${res.status}`);
+    //     }
 
+    //     return await res.json();
+    // }
 
-        return await res.json();
-    }
-
-    getResource(' http://localhost:3000/questions')
-        .then(res => data = res)
+    // getResource(' http://localhost:3000/questions')
+    //     .then(res => data = res)
 
     const btnOpenModal = document.getElementById('btnOpenModal');
     const modalBlock = document.getElementById('modalBlock');
@@ -101,35 +121,58 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
     const playTest = () => {
-        const numberQuestion = 0;
-        const answers = [];
-        console.log(data);
+        let numberQuestion = 0;
 
-
-        answersOutput.innerHTML = '';
 
         // функция выдает нам элементы ответов для отрисовки
-        const renderQiestions = (index) => {
-
-            questions[index].answers.forEach((answer) => {
+        const renderQiestions = (numberQuestion) => {
+            questions[numberQuestion].answers.forEach((answer, index) => {
 
                 const itemBlock = document.createElement('div');
-                itemBlock.classList.add('answers-item', 'col-3', 'd-flex', 'justify-content-center');
+                itemBlock.classList.add('answers-item', 'd-flex', 'justify-content-center');
 
                 itemBlock.innerHTML = `
-                    <input type="radio" id="answerItem1" name="answer" class="d-none">
-                    <label for="answerItem1">${answer.title}</label>
+                    <input type="${questions[numberQuestion].type}" id="answerItem${index}" name="answer" class="d-none">
+                    <label for="answerItem${index}" class="d-flex flex-column justify-content-between">
+                        <img class="answerImg" src=${answer.url} alt="burger">
+                        <span>${answer.title}</span>
+                     </label>
                 `
                 answersOutput.appendChild(itemBlock);
             })
+
         }
 
         // вывод информации в элементы окна
-        const renderQuestion = (index) => {
-            questionOutput.textContent = questions[index].question;
+        const renderQuestion = (numberQuestion) => {
+            answersOutput.innerHTML = '';
 
-            renderQiestions(index);
+            questionOutput.textContent = questions[numberQuestion].question;
+            renderQiestions(numberQuestion);
+
+            if (numberQuestion === 0) {
+                prev.classList.add('d-none')
+            }
+
+            if (numberQuestion > 0 && numberQuestion < questions.length - 1) {
+                prev.classList.remove('d-none')
+                next.classList.remove('d-none')
+            }
+
+            if (numberQuestion === questions.length - 1) {
+                next.classList.add('d-none')
+            }
         }
+
+        next.addEventListener('click', () => {
+            numberQuestion++;
+            renderQuestion(numberQuestion)
+        })
+
+        prev.addEventListener('click', () => {
+            numberQuestion--;
+            renderQuestion(numberQuestion)
+        })
 
         // сразу запускаем отрисовку 
         renderQuestion(numberQuestion);
