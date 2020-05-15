@@ -4,19 +4,12 @@ document.addEventListener('DOMContentLoaded', function () {
     const closeModal = document.querySelector('#closeModal');
     const questionTitle = document.querySelector('#question');
     const formAnswers = document.querySelector('#formAnswers');
+    const burger = document.querySelector('.burger');
 
-    btnOpenModal.addEventListener('click', () => {
-        modalBlock.classList.add('d-block');
-        playTest();
-    })
-
-    closeModal.addEventListener('click', () => {
-        modalBlock.classList.remove('d-block');
-    })
 
     const playTest = () => {
         const renderQuestions = () => {
-            questionTitle.textContent = 'Какого цвета бургер вы хотите';
+            // questionTitle.textContent = `${question}`;
 
             formAnswers.innerHTML = `
                 <div class="answers-item d-flex flex-column">
@@ -27,17 +20,31 @@ document.addEventListener('DOMContentLoaded', function () {
                     </label>
                 </div>
                 <div class="answers-item d-flex justify-content-center">
-                    <input type="radio" id="answerItem2" name="answer" class="d-none">
+                <input type="radio" id="answerItem2" name="answer" class="d-none">
                     <label for="answerItem2" class="d-flex flex-column justify-content-between">
                     <img class="answerImg" src="./image/burgerBlack.png" alt="burger">
                     <span>Черный</span>
                     </label>
-                </div>
-            `
+                    </div>
+                    `
         }
         renderQuestions();
     }
 
 
+    burger.addEventListener('click', function () {
+        burger.classList.add('active');
+        modalBlock.classList.add('d-block');
+        playTest();
+    })
 
+    btnOpenModal.addEventListener('click', () => {
+        modalBlock.classList.add('d-block');
+        playTest();
+    })
+
+    closeModal.addEventListener('click', () => {
+        modalBlock.classList.remove('d-block');
+        burger.classList.remove('active');
+    })
 })
