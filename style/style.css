@@ -56,6 +56,10 @@ label span {
     background-size: 115%;
 }
 
+.formAnswers {
+    align-items: center;
+}
+
 .modal {
     background: rgba(0,0,0, 0.5);
 }
