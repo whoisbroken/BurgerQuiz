@@ -1,4 +1,4 @@
-
+// upload of DOM tree before action taken
 document.addEventListener('DOMContentLoaded', function () {
     const btnOpenModal = document.querySelector('#btnOpenModal');
     const modalBlock = document.querySelector('#modalBlock');
@@ -9,7 +9,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const nextButton = document.querySelector('#next')
     const prevButton = document.querySelector('#prev');
     const modalDialog = document.querySelector('.modal-dialog');
+    const send = document.getElementById('send');
 
+    // array of objects with questions
     const questions = [
         {
             question: "Какого цвета бургер?",
@@ -100,11 +102,12 @@ document.addEventListener('DOMContentLoaded', function () {
     let count = -100;
 
     modalDialog.style.top = count + "%";
-    
+
+    // animate modal
     const animateModal = () => {
         modalDialog.style.top = count + "%";
         count += 4;
-          
+
         if (count < 0) {
             requestAnimationFrame(animateModal);
 
@@ -113,33 +116,24 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     };
 
+    // start of testing
     const playTest = () => {
+
+        const finalAnswers = [];
 
         let numberQuestion = 0;
 
         const renderAnswers = (index) => {
 
-            if (numberQuestion === 0) {
-                prevButton.style.display = 'none';
-            }
-
-            if (numberQuestion > 0) {
-                prevButton.style.display = 'block';
-            }
-
-            if (numberQuestion === questions.length - 1) {
-                nextButton.style.display = 'none';
-            }
-
             questions[index].answers.forEach((answer) => {
 
                 const answerItem = document.createElement('div');
 
-                answerItem.classList.add('answers-item', 'd-flex', 'flex-column');
+                answerItem.classList.add('answers-item', 'd-flex', 'justify-content-center');
 
                 answerItem.innerHTML = `
-                            <input type="${questions[index].type}" id="${answer.id}" name="answer" class="d-none">
-                            <label for="${answer.id}" class="d-flex flex-column justify-content-between">
+                            <input type="${questions[index].type}" id="${answer.title}" name="answer" class="d-none" value="${answer.title}">
+                            <label for="${answer.title}" class="d-flex flex-column justify-content-between">
                             <img class="answerImg" src=${answer.url} alt="burger">
                             <span>${answer.title}</span>
                             </label>
@@ -148,18 +142,68 @@ document.addEventListener('DOMContentLoaded', function () {
             })
         }
 
+        // запуск функции рендеринга
         const renderQuestions = (indexQuestion) => {
 
             formAnswers.textContent = '';
 
-            questionTitle.textContent = `${questions[indexQuestion].question}`
+            if (numberQuestion >= 0 && numberQuestion <= questions.length - 1) {
 
-            renderAnswers(indexQuestion);
+                questionTitle.textContent = `${questions[indexQuestion].question}`
+
+                renderAnswers(indexQuestion);
+
+                nextButton.classList.remove('d-none');
+                prevButton.classList.remove('d-none');
+                send.classList.add('d-none');
+            }
+
+            if (numberQuestion === 0) {
+                prevButton.classList.add('d-none');
+                send.classList.remove('d-block');
+            }
+
+            if (numberQuestion === questions.length) {
+                questionTitle.textContent = '';
+                nextButton.classList.add('d-none');
+                prevButton.classList.add('d-none');
+                formAnswers.textContent = 'Thanks!';
+                send.classList.add('d-block');
+
+                formAnswers.innerHTML = `
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Enter your phone</label>
+                    <input type="text" class="form-control" id="numberPhone">
+                </div>
+                `
+            }
+            if (numberQuestion === questions.length + 1) {
+                formAnswers.textContent = "Спасибо за пройденный тест!"
+                setTimeout(() => {
+                    modalBlock.classList.remove('d-block');
+                }, 2000)
+            }
         }
         renderQuestions(numberQuestion);
 
+        const checkAnswer = () => {
+            const obj = {};
+            const inputs = [...formAnswers.elements].filter((input) => input.checked || input.id === "numberPhone");
 
+            inputs.forEach((input, index) => {
+                if (numberQuestion >= 0 && numberQuestion <= questions.length - 1) {
+                    obj[`${index}_${questions[numberQuestion].question}`] = input.value;
+                }
+                if (numberQuestion === questions.length) {
+                    obj['Номер телефона'] = input.value;
+                }
+            })
+            finalAnswers.push(obj);
+        }
+
+        // обработчики событий кнопок next и prev
         nextButton.onclick = () => {
+            checkAnswer();
             numberQuestion++;
             renderQuestions(numberQuestion);
         }
@@ -168,9 +212,14 @@ document.addEventListener('DOMContentLoaded', function () {
             numberQuestion--;
             renderQuestions(numberQuestion);
         }
+        send.onclick = () => {
+            checkAnswer();
+            numberQuestion++;
+            renderQuestions(numberQuestion);
+        }
     }
 
-
+    // обработчик события бургер меню 
     burger.addEventListener('click', function () {
         requestAnimationFrame(animateModal);
 
@@ -179,6 +228,7 @@ document.addEventListener('DOMContentLoaded', function () {
         playTest();
     })
 
+    // обработчик события для начала теста
     btnOpenModal.addEventListener('click', () => {
         requestAnimationFrame(animateModal);
 
@@ -186,6 +236,7 @@ document.addEventListener('DOMContentLoaded', function () {
         playTest();
     })
 
+    // обработчик события для закрытия моадльного окна или бургер меню по клику на произвольное место
     document.addEventListener('click', (e) => {
 
         const target = e.target
@@ -196,10 +247,10 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     })
 
+    // обработчик события для закрытия моадльного окна или бургер меню
     closeModal.addEventListener('click', () => {
         modalBlock.classList.remove('d-block');
         burger.classList.remove('active');
     })
-
 
 })
